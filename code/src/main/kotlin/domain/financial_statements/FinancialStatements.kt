@@ -1,5 +1,7 @@
 package domain.financial_statements
 
+import java.time.LocalDate
+
 /**
  * 財務諸表
  *
@@ -10,5 +12,13 @@ package domain.financial_statements
  * - 株主資本等変動計算書 : [ShareholdersEquityStatement]
  *
  * また、キャッシュフロー計算書は、金融商品取引法が適用される上場企業のみ、作成を義務付けられている。
+ *
+ * @param financialYearStartDate : 会計年度の開始日
+ * @param financialYearEndDate : 会計年度の終了日
  */
-sealed class FinancialStatements
+sealed class FinancialStatements(
+    open val financialYearEndDate: LocalDate
+) {
+    val financialYearStartDate: LocalDate
+        get() = financialYearEndDate.minusYears(1).plusDays(1)
+}

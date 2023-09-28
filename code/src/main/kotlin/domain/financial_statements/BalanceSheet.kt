@@ -1,5 +1,7 @@
 package domain.financial_statements
 
+import java.time.LocalDate
+
 /**
  * 貸借対照表
  *
@@ -12,7 +14,11 @@ package domain.financial_statements
  * - 右側(貸方)：「負債の部」、「純資産の部」
  */
 // TODO 貸借対照表の項目を記載
-class BalanceSheet : FinancialStatements() {
+data class BalanceSheet(
+    override val financialYearEndDate: LocalDate,
+) : FinancialStatements(
+    financialYearEndDate
+) {
     // ===借方===
     // 資産の部
     // ===貸方===

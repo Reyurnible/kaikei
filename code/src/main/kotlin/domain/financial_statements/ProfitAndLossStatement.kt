@@ -1,5 +1,7 @@
 package domain.financial_statements
 
+import java.time.LocalDate
+
 /**
  * 損益計算書
  *
@@ -9,7 +11,10 @@ package domain.financial_statements
  * 損益計算書は「収益」と「費用」、「利益」から構成
  */
 // @TODO 損益計算書の項目を記載
-class ProfitAndLossStatement : FinancialStatements() {
-
+data class ProfitAndLossStatement(
+    override val financialYearEndDate: LocalDate,
+) : FinancialStatements(
+    financialYearEndDate
+) {
 
 }
