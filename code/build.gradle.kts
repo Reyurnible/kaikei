@@ -1,8 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.DokkaConfiguration.Visibility
 
 plugins {
     kotlin("jvm") version "1.6.10"
     application
+    id("org.jetbrains.dokka") version "1.9.10"
 }
 
 group = "me.hosakashun"
@@ -25,10 +28,38 @@ tasks.test {
     useJUnit()
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
 application {
-    mainClassName = "ServerKt"
+    mainClass.set("ServerKt")
+}
+
+tasks.dokkaHtml {
+    outputDirectory.set(rootDir.resolve("documentation/html"))
+}
+
+tasks.dokkaGfm {
+    outputDirectory.set(rootDir.resolve("documentation/markdown"))
+}
+
+tasks.withType<DokkaTask>().configureEach {
+    dokkaSourceSets {
+        configureEach {
+            moduleName.set("Kaikei")
+            // ModuleとPackageの説明追加のために、対象ファイルを追加
+            includes.from("Module.md")
+            // 明らかな機能を抑制するかどうか。デフォルト:trueだが、明示的に指定する。
+            suppressObviousFunctions.set(true)
+            // 指定したクラスで明示的にオーバーライドされていない継承メンバを抑制するかどうか。
+            suppressInheritedMembers.set(true)
+            documentedVisibilities.set(
+                setOf(
+                    Visibility.PUBLIC,
+                    Visibility.PROTECTED,
+                )
+            )
+        }
+    }
 }
