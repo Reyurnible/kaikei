@@ -18,14 +18,15 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
     implementation("io.ktor:ktor-server-netty:1.6.3")
     implementation("io.ktor:ktor-html-builder:1.6.3")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+    testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.0")
 }
 
 tasks.test {
-    useJUnit()
+    useJUnitPlatform()
 }
 
 tasks.withType<KotlinCompile> {
