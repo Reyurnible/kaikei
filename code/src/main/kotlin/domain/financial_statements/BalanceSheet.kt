@@ -18,11 +18,13 @@ import java.time.LocalDate
  */
 // TODO 貸借対照表の項目を記載
 data class BalanceSheet(
+    override val financialYearStartDate: LocalDate,
     override val financialYearEndDate: LocalDate,
     // ===借方===
     val assets: BalanceSheet.Assets,
     // ===貸方===
 ) : FinancialStatements(
+    financialYearStartDate,
     financialYearEndDate
 ) {
     // ===借方===

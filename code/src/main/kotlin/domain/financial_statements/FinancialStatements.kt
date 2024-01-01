@@ -20,8 +20,6 @@ import java.time.LocalDate
  * @param financialYearEndDate : 会計年度の終了日
  */
 sealed class FinancialStatements(
-    open val financialYearEndDate: LocalDate
-) {
-    val financialYearStartDate: LocalDate
-        get() = financialYearEndDate.minusYears(1).plusDays(1)
-}
+    open val financialYearStartDate: LocalDate,
+    open val financialYearEndDate: LocalDate,
+)

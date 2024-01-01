@@ -9,8 +9,10 @@ import java.time.LocalDate
  */
 // TODO キャッシュフロー計算書の項目を記載
 data class CashFlowStatement(
+    override val financialYearStartDate: LocalDate,
     override val financialYearEndDate: LocalDate,
 ) : FinancialStatements(
+    financialYearStartDate,
     financialYearEndDate
 ) {
 

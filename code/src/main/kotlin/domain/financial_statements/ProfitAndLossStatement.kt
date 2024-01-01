@@ -12,8 +12,10 @@ import java.time.LocalDate
  */
 // TODO 損益計算書の項目を記載
 data class ProfitAndLossStatement(
+    override val financialYearStartDate: LocalDate,
     override val financialYearEndDate: LocalDate,
 ) : FinancialStatements(
+    financialYearStartDate,
     financialYearEndDate
 ) {
 
